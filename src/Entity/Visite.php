@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Visite
      * @ORM\Column(type="integer")
      */
     private $dureeRecommandee;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DetailVisite", mappedBy="detailVisite")
+     */
+    private $detailVisites;
+
+    public function __construct()
+    {
+        $this->detailVisites = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,37 @@ class Visite
     public function setDureeRecommandee(int $dureeRecommandee): self
     {
         $this->dureeRecommandee = $dureeRecommandee;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetailVisite[]
+     */
+    public function getDetailVisites(): Collection
+    {
+        return $this->detailVisites;
+    }
+
+    public function addDetailVisite(DetailVisite $detailVisite): self
+    {
+        if (!$this->detailVisites->contains($detailVisite)) {
+            $this->detailVisites[] = $detailVisite;
+            $detailVisite->setDetailVisite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailVisite(DetailVisite $detailVisite): self
+    {
+        if ($this->detailVisites->contains($detailVisite)) {
+            $this->detailVisites->removeElement($detailVisite);
+            // set the owning side to null (unless already changed)
+            if ($detailVisite->getDetailVisite() === $this) {
+                $detailVisite->setDetailVisite(null);
+            }
+        }
 
         return $this;
     }

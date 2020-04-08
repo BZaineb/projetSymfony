@@ -26,6 +26,11 @@ class DetailExcursion
      */
     private $dateFin;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\excursion", inversedBy="detailExcursions")
+     */
+    private $detailExcursion;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class DetailExcursion
     public function setDateFin(\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getDetailExcursion(): ?excursion
+    {
+        return $this->detailExcursion;
+    }
+
+    public function setDetailExcursion(?excursion $detailExcursion): self
+    {
+        $this->detailExcursion = $detailExcursion;
 
         return $this;
     }

@@ -26,6 +26,11 @@ class DetailVisite
      */
     private $dateFin;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\visite", inversedBy="detailVisites")
+     */
+    private $detailVisite;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class DetailVisite
     public function setDateFin(\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getDetailVisite(): ?visite
+    {
+        return $this->detailVisite;
+    }
+
+    public function setDetailVisite(?visite $detailVisite): self
+    {
+        $this->detailVisite = $detailVisite;
 
         return $this;
     }

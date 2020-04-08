@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,6 +37,16 @@ class Excursion
      * @ORM\Column(type="integer")
      */
     private $dureeRecommandee;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DetailExcursion", mappedBy="detailExcursion")
+     */
+    private $detailExcursions;
+
+    public function __construct()
+    {
+        $this->detailExcursions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +97,37 @@ class Excursion
     public function setDureeRecommandee(int $dureeRecommandee): self
     {
         $this->dureeRecommandee = $dureeRecommandee;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DetailExcursion[]
+     */
+    public function getDetailExcursions(): Collection
+    {
+        return $this->detailExcursions;
+    }
+
+    public function addDetailExcursion(DetailExcursion $detailExcursion): self
+    {
+        if (!$this->detailExcursions->contains($detailExcursion)) {
+            $this->detailExcursions[] = $detailExcursion;
+            $detailExcursion->setDetailExcursion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailExcursion(DetailExcursion $detailExcursion): self
+    {
+        if ($this->detailExcursions->contains($detailExcursion)) {
+            $this->detailExcursions->removeElement($detailExcursion);
+            // set the owning side to null (unless already changed)
+            if ($detailExcursion->getDetailExcursion() === $this) {
+                $detailExcursion->setDetailExcursion(null);
+            }
+        }
 
         return $this;
     }
