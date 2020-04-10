@@ -1,0 +1,10 @@
+{# {% extends 'base.html.twig' %} #}
+
+{% block title %}Formulaire Visite{% endblock %}
+
+{% block content %}
+{{ form_start (formulaireVisite) }}
+    {{ form_widget (formulaireVisite) }}
+    <input type="submit" class="btn" value="Envoyer"/>
+{{ form_end (formulaireVisite)}}
+{% endblock %}
