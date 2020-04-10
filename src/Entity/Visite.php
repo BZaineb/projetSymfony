@@ -29,7 +29,7 @@ class Visite
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=100, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $photo;
 

@@ -1,0 +1,11 @@
+{# {% extends 'base.html.twig' %} #}
+
+{% block title %}Formulaire Excursion{% endblock %}
+
+{% block content %}
+
+{{ form_start (formulaireExcursion) }}
+    {{ form_widget (formulaireExcursion) }}
+    <input type="submit" class="btn" value="Envoyer"/>
+{{ form_end (formulaireExcursion)}}
+{% endblock %}
