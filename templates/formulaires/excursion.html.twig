@@ -4,7 +4,7 @@
 
 {% block content %}
 
-{{ form_start (formulaireExcursion) }}
+{{ form_start (formulaireExcursion, {'action': path('ajout_excursion'), 'method': 'POST'}) }}
     {{ form_widget (formulaireExcursion) }}
     <input type="submit" class="btn" value="Envoyer"/>
 {{ form_end (formulaireExcursion)}}

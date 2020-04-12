@@ -8,19 +8,36 @@ use App\Entity\Excursion;
 use App\Form\ExcursionType;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class FormulairesController extends AbstractController
 {
     /**
      * @Route("/formulaires/visite/creation", name="ajout_visite")
      */
-    public function formulaireVisiteCreation()
+    public function formulaireVisiteCreation(Request $request)
     {
         $uneVisite = new Visite();
         $formulaireVisite = $this->createForm(VisiteType::class, $uneVisite, array('action'=>$this->generateUrl("ajout_visite"),'method'=>'POST'));
-        $vars = ['formulaireVisite'=>$formulaireVisite->createView()];
-        return $this->render('formulaires/visite.html.twig',$vars);
+        $formulaireVisite->handleRequest($request);
+        if ($formulaireVisite->isSubmitted() && $formulaireVisite->isValid()){
+            $fichier = $uneVisite->getPhoto();
+            $nomFichierServeur = md5(uniqid()).".".$fichier->guessExtension();
+            $fichier->move("dossierFichiers", $nomFichierServeur);
+            $uneVisite->setPhoto($nomFichierServeur);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($uneVisite);
+            $em->flush();
+            return new Response("fichier uploaded et bd mise à jour");
+        }               
+        else{
+                $vars = ['formulaireVisite'=>$formulaireVisite->createView()];
+                return $this->render('formulaires/visite.html.twig',$vars);               
+            }
+        
     }
+
     /**
      * @Route("/formulaires/excursion/creation", name="ajout_excursion")
      */
