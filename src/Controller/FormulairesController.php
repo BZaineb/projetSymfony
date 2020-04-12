@@ -21,7 +21,8 @@ class FormulairesController extends AbstractController
         $uneVisite = new Visite();
         $formulaireVisite = $this->createForm(VisiteType::class, $uneVisite, array('action'=>$this->generateUrl("ajout_visite"),'method'=>'POST'));
         $formulaireVisite->handleRequest($request);
-        if ($formulaireVisite->isSubmitted() && $formulaireVisite->isValid()){
+        if ($formulaireVisite->isSubmitted() && $formulaireVisite->isValid())
+        {
             $fichier = $uneVisite->getPhoto();
             $nomFichierServeur = md5(uniqid()).".".$fichier->guessExtension();
             $fichier->move("dossierFichiers", $nomFichierServeur);
@@ -41,11 +42,26 @@ class FormulairesController extends AbstractController
     /**
      * @Route("/formulaires/excursion/creation", name="ajout_excursion")
      */
-    public function excursionVisiteCreation()
+    public function excursionVisiteCreation(Request $request)
     {
         $uneExcursion = new Excursion();
         $formulaireExcursion = $this->createForm(ExcursionType::class, $uneExcursion, array('action'=>$this->generateUrl("ajout_excursion"),'method'=>'POST'));
-        $vars = ['formulaireExcursion'=>$formulaireExcursion->createView()];
-        return $this->render('formulaires/excursion.html.twig',$vars);
+        $formulaireExcursion->handleRequest($request);
+        if ($formulaireExcursion->isSubmitted() && $formulaireExcursion->isValid())
+        {
+            $fichier = $uneExcursion->getPhoto();
+            $nomFichierServeur = md5(uniqid()).".".$fichier->guessExtension();
+            $fichier->move("dossierFichiers", $nomFichierServeur);
+            $uneExcursion->setPhoto($nomFichierServeur);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($uneExcursion);
+            $em->flush();
+            return new Response("fichier uploaded et bd mise à jour");
+        }
+        else{
+            $vars = ['formulaireExcursion'=>$formulaireExcursion->createView()];
+            return $this->render('formulaires/excursion.html.twig',$vars);
+        }
+        
     }
 }
