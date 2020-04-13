@@ -1,1 +1,105 @@
 {% extends 'base.html.twig' %}
+{% block content %}
+{# <form action="{{ path ('afficher_visites') }}" method="POST"}}>
+<ul>
+{% for valeur in visite %}
+<li>{{valeur.nom}}</li>
+<li>{{valeur.description}}</li>
+<li>{{valeur.dureeRecommandee}}</li>
+<li><img src="{{ asset ('dossierFichiers/'~ valeur.photo)}}" alt=""></li>
+{% endfor %}
+</ul>
+</form> #}
+   <!-- popular_destination_area_start  -->
+    <div class="popular_destination_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h3>Visite des sites touristiques</h3>
+                        <p>Les plus beaux sites.</p>
+                    </div>
+                </div>
+            </div>
+            <form action="{{ path ('afficher_visites') }}" method="POST"}}>
+             {% for valeur in visite %} 
+            <div class="row">   
+                           
+                <div class="col-lg-4 col-md-6">
+                
+                    <div class="single_destination">
+                        <div class="thumb">                         
+                            <img src="{{ asset ('dossierFichiers/'~ valeur.photo)}}" alt="">
+                        </div>
+                        <div class="content">
+                            <p class="d-flex align-items-center">{{valeur.nom}}<a href="travel_destination.html">{{valeur.dureeRecommandee}} heures</a> </p>
+                            <p>{{valeur.description}}</p>
+                        </div>
+                    </div>
+                
+                </div>
+                      
+                {# <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{{ asset ('assets/img/destination/2.png')}}" alt="">
+                        </div>
+                        <div class="content">
+                            <p class="d-flex align-items-center">Brazil <a href="travel_destination.html">  03 Places</a> </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{{ asset ('assets/img/destination/3.png')}}" alt="">
+                        </div>
+                        <div class="content">
+                            <p class="d-flex align-items-center">America <a href="travel_destination.html">  10 Places</a> </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{{ asset ('assets/img/destination/4.png')}}" alt="">
+                        </div>
+                        <div class="content">
+                            <p class="d-flex align-items-center">Nepal <a href="travel_destination.html">  02 Places</a> </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{{ asset ('assets/img/destination/5.png')}}" alt="">
+                        </div>
+                        <div class="content">
+                            <p class="d-flex align-items-center">Maldives <a href="travel_destination.html">  02 Places</a> </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination">
+                        <div class="thumb">
+                            <img src="{{ asset ('assets/img/destination/6.png')}}" alt="">
+                        </div>
+                        <div class="content">
+                            <p class="d-flex align-items-center">Indonesia <a href="travel_destination.html">  05 Places</a> </p>
+                            
+                        </div>
+                    </div>
+                    
+                </div>#}
+            
+            </div> 
+            {% endfor %}   
+        </div>       
+    </div>
+    
+    <!-- popular_destination_area_end  -->
+{% endblock %}

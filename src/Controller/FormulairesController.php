@@ -38,6 +38,17 @@ class FormulairesController extends AbstractController
             }
         
     }
+    /**
+     * @Route("/afficher/visites", name="afficher_visites")
+     */
+    public function afficherVisite()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $visiteRepo = $em->getRepository(Visite ::class);
+        $visites = $visiteRepo->findAll();
+        $vars = ['visite'=>$visites];
+        return $this->render('front/visite.html.twig', $vars);
+    }
 
     /**
      * @Route("/formulaires/excursion/creation", name="ajout_excursion")
