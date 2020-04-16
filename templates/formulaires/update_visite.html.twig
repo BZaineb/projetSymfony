@@ -1,0 +1,15 @@
+{# {% extends 'base.html.twig' %} #}
+
+{# {% block title %}Formulaire Visite{% endblock %} #}
+
+{% block body %}
+<h1>Update Visite</h1>
+<div>
+<form action="{{ path ('modifier_visite') }}" method="POST">
+nom<input required type="text" name="nom" value="{{ visite.nom }}"></input>
+description<input required type="text" name="nom" value="{{ visite.description }}"></input>
+nom<input required type="file" name="nom" value="{{ visite.photo }}"></input>
+duree<input required type="number" name="nom" value="{{ visite.dureeRecommandee }}"></input>
+</form>
+</div>
+{% endblock %}

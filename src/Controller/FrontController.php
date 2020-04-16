@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Visite;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FrontController extends AbstractController
 {
@@ -19,7 +20,12 @@ class FrontController extends AbstractController
      */
     public function visite()
     {
-        return $this->render('front/visite.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $visiteRepo = $em->getRepository(Visite ::class);
+        $visites = $visiteRepo->findAll();
+        $vars = ['visite'=>$visites];
+        return $this->render('front/visite.html.twig', $vars);
+        // return $this->render('front/visite.html.twig');
     }
      /**
      * @Route("/excursion", name="excursion")
