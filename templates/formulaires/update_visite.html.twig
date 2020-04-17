@@ -2,14 +2,19 @@
 
 {# {% block title %}Formulaire Visite{% endblock %} #}
 
-{% block body %}
-<h1>Update Visite</h1>
-<div>
-<form action="{{ path ('modifier_visite') }}" method="POST">
-nom<input required type="text" name="nom" value="{{ visite.nom }}"></input>
-description<input required type="text" name="nom" value="{{ visite.description }}"></input>
-nom<input required type="file" name="nom" value="{{ visite.photo }}"></input>
-duree<input required type="number" name="nom" value="{{ visite.dureeRecommandee }}"></input>
+{% block content %}
+<div class="container mt-4">
+<h1>Afficher Visite</h1>
+<div class="row">
+<form action="{{ path ('modifier_visites') }}" method="POST">
+{% for valeur in visite %}
+nom<input required type="text" name="nom" value="{{ valeur.nom }}"></input>
+description<input required type="text" name="nom" value="{{ valeur.description }}"></input>
+{# nom<input required type="file" name="nom" value="{{ valeur.photo }}"></input> #}
+duree<input required type="number" name="nom" value="{{ valeur.dureeRecommandee }}"></input>
+<button type="submit" class="btn" name="Modifier" value="{{valeur.id }}">Modifier</button>
+
+{% endfor %}
 </form>
 </div>
 {% endblock %}

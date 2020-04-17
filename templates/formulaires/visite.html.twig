@@ -3,9 +3,19 @@
 {# {% block title %}Formulaire Visite{% endblock %} #}
 
 {% block content %}
-<h1>Formulaire Visite</h1>
-{{ form_start (formulaireVisite, {'action': path('ajout_visite'), 'method': 'POST'}) }}
-    {{ form_widget (formulaireVisite) }}  
-    <input type="submit" class="btn" value="Ajouter"/>
-{{ form_end (formulaireVisite) }}
+<h1>Update Visite</h1>
+<div>
+<form action="{{ path ('modifier_visite') }}" method="Get">
+nom<input required type="text" name="nom" value="{{ visite.nom }}"></input>
+description<input required type="text" name="nom" value="{{ visite.description }}"></input>
+nom<input required type="file" name="nom" value="{{ visite.photo }}"></input>
+duree<input required type="number" name="nom" value="{{ visite.dureeRecommandee }}"></input>
+</form>
+</div>
+{# <form action="{{ path ('visite') }}" method="POST"}}>
+             {% for valeur in visite %}
+             {{ valeur }}
+             {% endfor %}
+</form> #}
+
 {% endblock %}
