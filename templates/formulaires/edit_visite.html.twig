@@ -1,17 +1,23 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %} #}
 
 {# {% block title %}Formulaire Visite{% endblock %} #}
 
 {% block content %}
 <div class="container mt-4">
-<h1>Ajout Visite</h1>
-{{ form_start (formulaireVisite, {'action': path('ajout_visite'), 'method': 'POST'}) }}
+<h1>clickez sur une visite pour modifier</h1>
+{% for valeur in visite %}
+<p><a href="{{ path ('modifier_visites' , {'id':valeur.id}) }}">
+{{ valeur.nom }}---{{ valeur.description }}---{{ valeur.photo }}---{{ valeur.dureeRecommandee }}">
+</a></p>
+{# <form action="{{ path ('modifier_visites', {'id':valeur.id}) }}">
     <div class="row">
-    {{ form_widget (formulaireVisite) }}      
-    </div>
-    <button class="btn btn-primary">Ajouter</button>
-    {# <input type="submit" class="btn" value="Ajouter"/> #}
-{{ form_end (formulaireVisite) }}
-</div>
 
+      <p>{{ valeur.nom }} </p><br>
+      <p>{{ valeur.description }}</p><br>
+      <p>{{ valeur.photo }}</p><br> 
+      <p>{{ valeur.dureeRecommandee}}</p><br>
+      <button type="submit" class="btn" name="Modifier">Modifier</button>
+    </div>
+</form> #}
+{% endfor %}
 {% endblock %}

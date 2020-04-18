@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{# {% block title %}Formulaire Visite{% endblock %} #}
+
+
+{% block content %}
+<div class="container mt-4">
+<h1>Modidier Visite</h1>
+{{ form_start (formulaireVisite, {'action': path('ajout_visite'), 'method': 'POST'}) }}
+    <div class="row">
+    {{ form_widget (formulaireVisite) }}      
+    </div>
+    <button class="btn btn-primary">Modifiez</button>
+    {# <input type="submit" class="btn" value="Ajouter"/> #}
+{{ form_end (formulaireVisite) }}
+</div>
+{% endblock %}

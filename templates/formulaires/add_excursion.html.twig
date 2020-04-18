@@ -1,11 +1,14 @@
-{# {% extends 'base.html.twig' %} #}
+{% extends 'base.html.twig' %}
 
 {% block title %}Formulaire Excursion{% endblock %}
 
 {% block content %}
-
+<div class="container mt-4">
 {{ form_start (formulaireExcursion, {'action': path('ajout_excursion'), 'method': 'POST'}) }}
+    <div class="row">
     {{ form_widget (formulaireExcursion) }}
+    </div>
     <input type="submit" class="btn" value="Envoyer"/>
 {{ form_end (formulaireExcursion)}}
+</div>
 {% endblock %}

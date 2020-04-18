@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Excursion;
 use App\Entity\Visite;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +14,11 @@ class FrontController extends AbstractController
      */
     public function index()
     {
-        return $this->render('front/index.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $visiteRepo = $em->getRepository(Visite ::class);
+        $visites = $visiteRepo->findAll();
+        $vars = ['visite'=>$visites];
+        return $this->render('front/index.html.twig',$vars);
     }
      /**
      * @Route("/visite", name="visite")
@@ -32,7 +37,11 @@ class FrontController extends AbstractController
      */
     public function excursion()
     {
-        return $this->render('front/excursion.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $excursionRepo = $em->getRepository(Excursion ::class);
+        $excursions = $excursionRepo->findAll();
+        $vars = ['excursion'=>$excursions];
+        return $this->render('front/excursion.html.twig', $vars);
     }
 
      /**
