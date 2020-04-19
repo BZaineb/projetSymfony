@@ -45,45 +45,7 @@
             </div>
         </div>
 
-    </div>
-    <!-- slider_area_end -->
-
-    <!-- where_togo_area_start  -->
-    {# <div class="where_togo_area">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3">
-                    <div class="form_area">
-                        <h3>Where you want to go?</h3>
-                    </div>
-                </div>
-                <div class="col-lg-9">
-                    <div class="search_wrap">
-                        <form class="search_form" action="#">
-                            <div class="input_field">
-                                <input type="text" placeholder="Where to go?">
-                            </div>
-                            <div class="input_field">
-                                <input id="datepicker" placeholder="Date">
-                            </div>
-                            <div class="input_field">
-                                <select>
-                                    <option data-display="Travel type">Travel type</option>
-                                    <option value="1">Some option</option>
-                                    <option value="2">Another option</option>
-                                </select>
-                            </div>
-                            <div class="search_btn">
-                                <button class="boxed-btn4 " type="submit" >Search</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> #}
-    <!-- where_togo_area_end  -->
-    
+    </div>    
     <!-- popular_destination_area_start  -->
     <div class="popular_destination_area">
         <div class="container">
@@ -96,8 +58,8 @@
                 </div>
             </div>
             <form action="{{ path ('visite') }}" method="POST"}}>
-             {% for valeur in visite %} 
             <div class="row">
+            {% for valeur in visite %} 
                 <div class="col-lg-4 col-md-6">
                     <div class="single_destination">
                         <div class="thumb">
@@ -109,63 +71,8 @@
                         </div>
                     </div>
                 </div>
-                {# <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="{{ asset ('assets/img/destination/2.png')}}" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center">Brazil <a href="travel_destination.html">  03 Places</a> </p>
-                            
-                        </div>
-                    </div>
-                </div> #}
-                {# <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="{{ asset ('assets/img/destination/3.png')}}" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center">America <a href="travel_destination.html">  10 Places</a> </p>
-                            
-                        </div>
-                    </div>
-                </div> #}
-                {# <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="{{ asset ('assets/img/destination/4.png')}}" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center">Nepal <a href="travel_destination.html">  02 Places</a> </p>
-                            
-                        </div>
-                    </div>
-                </div> #}
-                {# <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="{{ asset ('assets/img/destination/5.png')}}" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center">Maldives <a href="travel_destination.html">  02 Places</a> </p>
-                            
-                        </div>
-                    </div>
-                </div> #}
-                {# <div class="col-lg-4 col-md-6">
-                    <div class="single_destination">
-                        <div class="thumb">
-                            <img src="{{ asset ('assets/img/destination/6.png')}}" alt="">
-                        </div>
-                        <div class="content">
-                            <p class="d-flex align-items-center">Indonesia <a href="travel_destination.html">  05 Places</a> </p>
-                            
-                        </div>
-                    </div>
-                </div> #}
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
     <!-- popular_destination_area_end  -->

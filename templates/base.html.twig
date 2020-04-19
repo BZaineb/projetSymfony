@@ -38,7 +38,7 @@
                         <div class="row align-items-center">
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.html">
+                                    <a href="{{ path ('login') }}">
                                         <img src="{{ asset ('assets/img/logoP.jpg') }}" alt="">
                                     </a>
                                 </div>
@@ -47,24 +47,24 @@
                                 <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a class="active" href="index.html">A propos</a></li>
-                                            <li><a href="about.html">Visites</a></li>
-                                            {# <li><a class="" href="travel_destination.html">Excursions</a></l/li> #}
-                                            <li><a href="#">Excursions <i class="ti-angle-down"></i></a>
-                                                <ul class="submenu">
+                                            <li><a class="active" href="{{ path ('index') }}">A propos</a></li>
+                                            <li><a href="{{ path ('visite') }}">Visites</a></li>
+                                            <li><a href="{{ path ('excursion') }}">Excursions</i></a>
+                                            {#<li><a href="{{ path ('excursion') }}">Excursions <i class="ti-angle-down"></i></a>
+                                                 <ul class="submenu">
                                                         <li><a href="destination_details.html">Excursions details</a></li>
-                                                        {# <li><a href="elements.html">elements</a></li> #}
-                                                </ul>
+                                                        {# <li><a href="elements.html">elements</a></li> 
+                                                </ul> #}
                                             </li>
-                                            <li><a href="#">Devis</i></a>
-                                            <li><a href="#">LogIn</i></a>
+                                            {# <li><a href="{{ path ('devis') }}">Devis</i></a> #}
+                                            <li><a href="{{ path ('login') }}">LogIn</i></a>
                                             {# <li><a href="#">LogIn<i class="ti-angle-down"></i></a>
                                                 <ul class="submenu">
                                                     <li><a href="blog.html">blog</a></li>
                                                     <li><a href="single-blog.html">single-blog</a></li>
                                                 </ul>
                                             </li> #}
-                                            <li><a href="contact.html">Contact</a></li>
+                                            {# <li><a href="{{ path ('contact') }}">Contact</a></li> #}
                                         </ul>
                                     </nav>
                                 </div>

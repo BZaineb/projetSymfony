@@ -30,7 +30,7 @@ class FrontController extends AbstractController
         $visites = $visiteRepo->findAll();
         $vars = ['visite'=>$visites];
         return $this->render('front/visite.html.twig', $vars);
-        // return $this->render('front/visite.html.twig');
+        
     }
      /**
      * @Route("/excursion", name="excursion")
