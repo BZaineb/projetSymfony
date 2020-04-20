@@ -102,6 +102,6 @@ class FormulaireLoginAuthentificatorAuthenticator extends AbstractFormLoginAuthe
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
+        return $this->urlGenerator->generate('login');
     }
 }

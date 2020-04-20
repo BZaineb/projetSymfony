@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<h3>Liste user</h3>
+<table>
+        <tr>
+            <th>Num</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Localite</th>
+        </tr>
+   >    {% for valeur in user %}
+        <tr>
+            <td>1<td>
+            <td>{{ valeur.nom }}</td>
+            <td>{{ valeur.prenom }}</td>
+            <td>{{ valeur.pseudo }}</td>
+            <td>{{ valeur.email }}</td>
+            <td>{{ valeur.localite }}</td>
+            <td><input type="submit"  value="modifier"></td>
+        </tr> 
+ 
+{% endfor %}
+</table>
+{% endblock %}

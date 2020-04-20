@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Visite;
 use App\Form\VisiteType;
 use App\Entity\Excursion;
 use App\Form\ExcursionType;
 use App\Repository\VisiteRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FormulairesController extends AbstractController
@@ -137,4 +138,15 @@ class FormulairesController extends AbstractController
         }
         
     }
+        /**
+         * @Route("/afficher/user", name="afficher_user")
+         */
+        public function listUser()
+        {
+            $em = $this->getDoctrine()->getManager();
+            $userRepo = $em->getRepository(User ::class);
+            $user = $userRepo->findAll();
+            $vars = ['user'=>$user];
+            return $this->render('formulaires/list_user.html.twig', $vars);
+        }
 }
