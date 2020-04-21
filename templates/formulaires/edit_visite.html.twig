@@ -6,7 +6,7 @@
 <div class="container mt-4">
 <h1>clickez sur une visite pour modifier</h1>
 {% for valeur in visite %}
-<p><a href="{{ path ('modifier_visites' , {'id':valeur.id}) }}">
+<p><a href="{{ path ('modifier_visite' , {'id':valeur.id}) }}">
 {{ valeur.nom }}---{{ valeur.description }}---{{ valeur.photo }}---{{ valeur.dureeRecommandee }}">
 </a></p>
 {# <form action="{{ path ('modifier_visites', {'id':valeur.id}) }}">

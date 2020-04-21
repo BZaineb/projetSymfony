@@ -3,12 +3,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface
 {
@@ -36,24 +34,24 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50)
      */
     private $pseudo;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=50)
      */
-    private $localite;
+    private $pays;
 
     public function getId(): ?int
     {
@@ -169,14 +167,14 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getLocalite(): ?string
+    public function getPays(): ?string
     {
-        return $this->localite;
+        return $this->pays;
     }
 
-    public function setLocalite(?string $localite): self
+    public function setPays(string $pays): self
     {
-        $this->localite = $localite;
+        $this->pays = $pays;
 
         return $this;
     }

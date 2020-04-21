@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Espace log{% endblock %}
+{% block title %}Area{% endblock %}
 
 {% block content %}
 <div>
-{{ dump (app.user) }} 
-{# <h2>Bienvenue {{app.user.nom}}</h2> #}
+{# {{ dump (app.user) }}  #}
+<h2>Bienvenue {{app.user.nom}}</h2>
 <h6>TODO formulaire devis et réservation plus edit données</h6>
 </div>
 <a href="{{ logout_path('main')}}"><input type="submit" value="LogOut"></input><a>

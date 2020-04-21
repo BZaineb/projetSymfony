@@ -24,7 +24,7 @@ class UserFixtures extends Fixture
             $user->setPrenom("prenom".$i);
             $user->setPseudo("pseudo".$i);
             $user->setEmail("nom".$i."@gmail.com");
-            $user->setLocalite("Maroc");
+            $user->setPays("Belgique");
             $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,"lePassword".$i));
             $manager->persist($user);

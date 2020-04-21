@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container mt-4">
 <h1>Modidier Visite</h1>
-{{ form_start (formulaireVisite, {'action': path('ajout_visite'), 'method': 'POST'}) }}
+{{ form_start (formulaireVisite, {'action': path('modifier_visite', {'id':id}), 'method': 'POST'}) }}
     <div class="row">
     {{ form_widget (formulaireVisite) }}      
     </div>
