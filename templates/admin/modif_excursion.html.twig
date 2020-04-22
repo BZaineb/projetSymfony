@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Excursion{% endblock %}
+
+
+{% block content %}
+<div class="container mt-4">
+<h1>Modidier Excursion</h1>
+{{ form_start (formulaireExcursion, {'action': path('modifier_excursion', {'id':id}), 'method': 'POST'}) }}
+    <div class="row">
+    {{ form_widget (formulaireExcursion) }}      
+    </div>
+    <button class="btn btn-primary">Modifiez</button>
+    {# <input type="submit" class="btn" value="Ajouter"/> #}
+{{ form_end (formulaireExcursion) }}
+</div>
+{% endblock %}

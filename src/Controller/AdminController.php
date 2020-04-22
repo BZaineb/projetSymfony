@@ -14,12 +14,13 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class FormulairesController extends AbstractController
+class AdminController extends AbstractController
 {
+    //------Debut Action Visite-------//
     /**
-     * @Route("/insert/visite", name="ajout_visite")
+     * @Route("/ajout/visite", name="ajout_visite")
      */
-    public function insertVisite(Request $request)
+    public function ajoutVisite(Request $request)
     {
         $uneVisite = new Visite();
         $formulaireVisite = $this->createForm(VisiteType::class, $uneVisite, array('action' => $this->generateUrl("ajout_visite"), 'method' => 'POST'));
@@ -35,7 +36,7 @@ class FormulairesController extends AbstractController
             return new Response("fichier inséré et bd mise à jour");
         } else {
             $vars = ['formulaireVisite' => $formulaireVisite->createView()];
-            return $this->render('formulaires/add_visite.html.twig', $vars);
+            return $this->render('admin/add_excursion.html.twig', $vars);
         }
     }
     /**
@@ -47,13 +48,13 @@ class FormulairesController extends AbstractController
         $visiteRepo = $em->getRepository(Visite::class);
         $visites = $visiteRepo->findAll();
         $vars = ['visite' => $visites];
-        return $this->render('formulaires/edit_visite.html.twig', $vars);
+        return $this->render('admin/list_visite.html.twig', $vars);
     }
 
     /**
-     * @Route("/edit/visites/{id}", name="modifier_visite")
+     * @Route("/modifier/visites/{id}", name="modifier_visite")
      */
-    public function editVisite(Request $request, Visite $visite)
+    public function modifierVisite(Request $request, Visite $visite)
     {
         // dd($request->get('id'));
 
@@ -68,57 +69,36 @@ class FormulairesController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return new Response("fichier modifié et bd mise à jour");
+            return $this->redirectToRoute('afficher_visites');
         } else {
             // dd($request->get('id'));
             $vars = [
                 'formulaireVisite' => $formulaireVisite->createView(),
                 'id' => $request->get('id')
             ];
-            return $this->render('formulaires/modif_visite.html.twig', $vars);
+            return $this->render('admin/modif_visite.html.twig', $vars);
         }
     }
-    // /**
-    //  * @Route("/edit/visites/{id}", name="modifier_visites")
-    //  */                          
-    //     public function editVisite(Request $request, Visite $visite){
-    //     $id = $request->request->get('id');
-    //     dd($id);
-    //     $em = $this->getDoctrine()->getManager();
-    //     $visiteRepo = $em->getRepository(Visite::class);
-    //     $visite= $visiteRepo->findOneBy(array('id'=>$id));
-    //     dd($visite);
-    //     $visite->get($req->request->setNom('nom'));
-
-    //     $visite->setDescription($req->request->get('description'));
-    //     $visite->setPhoto($req->request->get('photo'));
-    //     $visite->setDureeRecommandee($req->request->get('dureeRecommandee'));
-
-    //     $em->flush();
-
-    //     return $this->render('formulaires/edit_visite.html.twig');
-    // }
     /**
-     * @Route("/delete/visites", name="effacer_visites")
+     * @Route("/supprimer/visites/{id}", name="supprimer_visites")
      */
-    public function deleteVisite(Request $request)
+    public function supprimerVisite($id)
     {
-        $id = $request->request->get('id');
-        dd('id');
         $em = $this->getDoctrine()->getManager();
-        $visite = $em->getRepository(Visite::class)->findBy(array("id" => $id));
-        dd($visite);
-
-        $em->remove($visite);
+        $rep = $em->getRepository(Visite::class);
+        $visiteASupprime=$rep->find($id);
+        $em->remove($visiteASupprime);
         $em->flush();
 
-        return $this->render('formulaires/update_visite.html.twig');
+        return $this->redirectToRoute('afficher_visites');
     }
-
+    //------Fin Action Visite-------//
+    //------Debut Action Excursion-------//
+    
     /**
-     * @Route("/insert/excursion", name="ajout_excursion")
+     * @Route("/ajout/excursion", name="ajout_excursion")
      */
-    public function insertExcursion(Request $request)
+    public function ajoutExcursion(Request $request)
     {
         $uneExcursion = new Excursion();
         $formulaireExcursion = $this->createForm(ExcursionType::class, $uneExcursion, array('action' => $this->generateUrl("ajout_excursion"), 'method' => 'POST'));
@@ -134,9 +114,61 @@ class FormulairesController extends AbstractController
             return new Response("fichier enregistré et bd mise à jour");
         } else {
             $vars = ['formulaireExcursion' => $formulaireExcursion->createView()];
-            return $this->render('formulaires/add_excursion.html.twig', $vars);
+            return $this->render('admin/add_excursion.html.twig', $vars);
         }
     }
+    /**
+     * @Route("/afficher/excursion", name="afficher_excursion")
+     */
+    public function afficherExcursion()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $excursionRepo = $em->getRepository(Excursion::class);
+        $excursion = $excursionRepo->findAll();
+        $vars = ['excursion' => $excursion];
+        return $this->render('admin/list_excursion.html.twig', $vars);
+    }
+    /**
+     * @Route("/modifier/excursion/{id}", name="modifier_excursion")
+     */
+    public function modifierExcursion(Request $request, Excursion $excursion)
+    {
+        $formulaireExcursion = $this->createForm(ExcursionType::class, $excursion);
+        // dd($excursion);
+        $formulaireExcursion->handleRequest($request);
+        if ($formulaireExcursion->isSubmitted() && $formulaireExcursion->isValid()) {
+            $fichier = $excursion->getPhoto();
+            $nomFichierServeur = md5(uniqid()) . "." . $fichier->guessExtension();
+            $fichier->move("dossierFichiers", $nomFichierServeur);
+            $excursion->setPhoto($nomFichierServeur);
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+
+            return $this->redirectToRoute('afficher_excursion');
+        } else {
+            // dd($request->get('id'));
+            $vars = [
+                'formulaireExcursion' => $formulaireExcursion->createView(),
+                'id' => $request->get('id')
+            ];
+            return $this->render('admin/modif_excursion.html.twig', $vars);
+        }
+    }
+     /**
+     * @Route("/supprimer/excursion/{id}", name="supprimer_excursion")
+     */
+    public function supprimerExcursion($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository(Excursion::class);
+        $excursionASupprime=$rep->find($id);
+        $em->remove($excursionASupprime);
+        $em->flush();
+
+        return $this->redirectToRoute('afficher_excursion');
+    }
+    //------Fin Action Excursion-------//
+    //------Debut Action User-------//
     /**
      * @Route("/afficher/user", name="afficher_user")
      */
@@ -146,6 +178,7 @@ class FormulairesController extends AbstractController
         $userRepo = $em->getRepository(User::class);
         $user = $userRepo->findAll();
         $vars = ['user' => $user];
-        return $this->render('formulaires/list_user.html.twig', $vars);
+        return $this->render('admin/list_user.html.twig', $vars);
     }
+    //------Fin Action User-------//
 }

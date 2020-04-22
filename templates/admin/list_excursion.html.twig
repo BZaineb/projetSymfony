@@ -1,0 +1,39 @@
+{% extends 'adminBase.html.twig' %}
+
+{# {% block title %}Formulaire Visite{% endblock %} #}
+
+{% block content %}
+<div class="container">
+<div class="cards">
+  {% for valeur in excursion %}
+  <div class="card">
+  <div class="card__image-holder">
+      <img class="card__image" src="{{ asset('/dossierFichiers/' ~ valeur.photo)}}" alt="" style="width:250px; hight:250px;" />
+  </div>
+  <div class="card-title">
+      <a href="#" class="toggle-info btn">
+        <span class="left"></span>
+        <span class="right"></span>
+      </a>
+      <h2>
+          {{ valeur.nom }}
+      </h2>
+    </div>
+    <div class="card-flap flap1">
+      <div class="card-description">
+       {{ valeur.description }}
+      </div>
+
+      <div class="card-flap flap2">
+              
+        <div class="card-actions">
+          <a href="{{ path ('modifier_excursion' , {'id':valeur.id}) }}" id="btn-edit" class="btn">Modifier</a> 
+          <a href="{{ path ('supprimer_excursion' , {'id':valeur.id}) }}" class="btn" >Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

@@ -16,7 +16,7 @@ class ExcursionType extends AbstractType {
     {
         $builder->add('nom', TextType::class)
                 ->add('description', TextareaType::class)
-                ->add('photo', FileType::class, array('label'=>'Ajout photo'))
+                ->add('photo', FileType::class, array('label'=>'Ajout photo', 'data_class'=> null))
                 ->add('dureeRecommandee', IntegerType::class);
         
     }

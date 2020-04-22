@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+<div class="container">
 <h3>Liste user</h3>
 <table>
         <tr>
@@ -17,10 +18,11 @@
             <td>{{ valeur.prenom }}</td>
             <td>{{ valeur.pseudo }}</td>
             <td>{{ valeur.email }}</td>
-            <td>{{ valeur.localite }}</td>
+            <td>{{ valeur.pays }}</td>
             <td><input type="submit"  value="modifier"></td>
         </tr> 
- 
+
 {% endfor %}
 </table>
+</div>
 {% endblock %}
