@@ -1,8 +1,21 @@
 {% extends 'adminBase.html.twig' %}
 
-{# {% block title %}Formulaire Visite{% endblock %} #}
+{% block title %}Formulaire Excursion{% endblock %}
 
 {% block content %}
+<style>
+a.btn {
+  background: #F4A460;
+  border-radius: 4px;
+  box-shadow: 0 2px 0px 0 rgba(0,0,0,0.25);
+  color: #ffffff;
+  display: inline-block;
+  padding: 6px 30px 8px;
+  position: relative;
+  text-decoration: none;
+	transition: all 0.1s 0s ease-out;
+}
+</style>
 <div class="container">
 <div class="cards">
   {% for valeur in excursion %}
@@ -11,10 +24,6 @@
       <img class="card__image" src="{{ asset('/dossierFichiers/' ~ valeur.photo)}}" alt="" style="width:250px; hight:250px;" />
   </div>
   <div class="card-title">
-      <a href="#" class="toggle-info btn">
-        <span class="left"></span>
-        <span class="right"></span>
-      </a>
       <h2>
           {{ valeur.nom }}
       </h2>
@@ -22,10 +31,8 @@
     <div class="card-flap flap1">
       <div class="card-description">
        {{ valeur.description }}
-      </div>
-
-      <div class="card-flap flap2">
-              
+      </div><br>
+      <div class="card-flap flap2">            
         <div class="card-actions">
           <a href="{{ path ('modifier_excursion' , {'id':valeur.id}) }}" id="btn-edit" class="btn">Modifier</a> 
           <a href="{{ path ('supprimer_excursion' , {'id':valeur.id}) }}" class="btn" >Delete</a>

@@ -33,14 +33,14 @@ class AdminController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($uneVisite);
             $em->flush();
-            return new Response("fichier inséré et bd mise à jour");
+            return $this->redirectToRoute('afficher_visite');
         } else {
             $vars = ['formulaireVisite' => $formulaireVisite->createView()];
-            return $this->render('admin/add_excursion.html.twig', $vars);
+            return $this->render('admin/add_visite.html.twig', $vars);
         }
     }
     /**
-     * @Route("/afficher/visites", name="afficher_visites")
+     * @Route("/admin", name="afficher_visite")
      */
     public function afficherVisite()
     {
@@ -69,7 +69,7 @@ class AdminController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return $this->redirectToRoute('afficher_visites');
+            return $this->redirectToRoute('afficher_visite');
         } else {
             // dd($request->get('id'));
             $vars = [
@@ -80,7 +80,7 @@ class AdminController extends AbstractController
         }
     }
     /**
-     * @Route("/supprimer/visites/{id}", name="supprimer_visites")
+     * @Route("/supprimer/visite/{id}", name="supprimer_visite")
      */
     public function supprimerVisite($id)
     {
@@ -90,7 +90,7 @@ class AdminController extends AbstractController
         $em->remove($visiteASupprime);
         $em->flush();
 
-        return $this->redirectToRoute('afficher_visites');
+        return $this->redirectToRoute('afficher_visite');
     }
     //------Fin Action Visite-------//
     //------Debut Action Excursion-------//
@@ -111,7 +111,7 @@ class AdminController extends AbstractController
             $em = $this->getDoctrine()->getManager();
             $em->persist($uneExcursion);
             $em->flush();
-            return new Response("fichier enregistré et bd mise à jour");
+            return $this->redirectToRoute('afficher_excursion');
         } else {
             $vars = ['formulaireExcursion' => $formulaireExcursion->createView()];
             return $this->render('admin/add_excursion.html.twig', $vars);
