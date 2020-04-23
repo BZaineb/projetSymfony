@@ -209,7 +209,7 @@ class AdminController extends AbstractController
     //     }
     // }
      /**
-     * @Route("/supprimer/excursion/{id}", name="supprimer_excursion")
+     * @Route("/supprimer/user/{id}", name="supprimer_user")
      */
     public function supprimerUser($id)
     {

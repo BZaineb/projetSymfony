@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}AreaMembre{% endblock %}
+
+{% block content %}
+<div class="container">
+{# {{ dump (app.user) }} 
+<h2>Bienvenue {{app.user.nom}}</h2>
+<h6>TODO formulaire devis et réservation plus edit données</h6>  #}
+<h3>Devis</h3>
+    {{ form_start (devis) }}<br>
+        {{ form_widget (devis.type) }}<br>
+        {{ form_widget (devis.nbPersonne) }}<br>
+        {{ form_widget (devis.categorieHebergement) }}<br>
+        <button class="btn btn-lg btn-primary">Envoyer</button>
+    {{ form_end (devis, {'render_rest':false}) }}
+</div>
+<a href="{{ logout_path('main')}}"><input type="submit" value="LogOut"></input><a>
+{% endblock %}
