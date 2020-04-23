@@ -26,6 +26,11 @@ class DescriptionExcursion
      */
     private $photo;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\excursion", inversedBy="descriptionExcursions")
+     */
+    private $type;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class DescriptionExcursion
     public function setPhoto(?string $photo): self
     {
         $this->photo = $photo;
+
+        return $this;
+    }
+
+    public function getType(): ?excursion
+    {
+        return $this->type;
+    }
+
+    public function setType(?excursion $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

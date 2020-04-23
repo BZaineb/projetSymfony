@@ -39,13 +39,19 @@ class Excursion
     private $dureeRecommandee;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\DetailExcursion", mappedBy="detailExcursion")
+     * @ORM\OneToMany(targetEntity="App\Entity\DetailExcursion", mappedBy="excursion")
      */
     private $detailExcursions;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\DescriptionExcursion", mappedBy="type")
+     */
+    private $descriptionExcursions;
 
     public function __construct()
     {
         $this->detailExcursions = new ArrayCollection();
+        $this->descriptionExcursions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -113,7 +119,7 @@ class Excursion
     {
         if (!$this->detailExcursions->contains($detailExcursion)) {
             $this->detailExcursions[] = $detailExcursion;
-            $detailExcursion->setDetailExcursion($this);
+            $detailExcursion->setExcursion($this);
         }
 
         return $this;
@@ -124,11 +130,43 @@ class Excursion
         if ($this->detailExcursions->contains($detailExcursion)) {
             $this->detailExcursions->removeElement($detailExcursion);
             // set the owning side to null (unless already changed)
-            if ($detailExcursion->getDetailExcursion() === $this) {
-                $detailExcursion->setDetailExcursion(null);
+            if ($detailExcursion->getExcursion() === $this) {
+                $detailExcursion->setExcursion(null);
             }
         }
 
         return $this;
     }
+
+    /**
+     * @return Collection|DescriptionExcursion[]
+     */
+    public function getDescriptionExcursions(): Collection
+    {
+        return $this->descriptionExcursions;
+    }
+
+    public function addDescriptionExcursion(DescriptionExcursion $descriptionExcursion): self
+    {
+        if (!$this->descriptionExcursions->contains($descriptionExcursion)) {
+            $this->descriptionExcursions[] = $descriptionExcursion;
+            $descriptionExcursion->setType($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDescriptionExcursion(DescriptionExcursion $descriptionExcursion): self
+    {
+        if ($this->descriptionExcursions->contains($descriptionExcursion)) {
+            $this->descriptionExcursions->removeElement($descriptionExcursion);
+            // set the owning side to null (unless already changed)
+            if ($descriptionExcursion->getType() === $this) {
+                $descriptionExcursion->setType(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

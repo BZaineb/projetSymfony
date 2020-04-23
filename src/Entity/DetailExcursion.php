@@ -27,9 +27,14 @@ class DetailExcursion
     private $dateFin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\excursion", inversedBy="detailExcursions")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="detailExcursions")
      */
-    private $detailExcursion;
+    private $reservation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Excursion", inversedBy="detailExcursions")
+     */
+    private $excursion;
 
     public function getId(): ?int
     {
@@ -60,14 +65,26 @@ class DetailExcursion
         return $this;
     }
 
-    public function getDetailExcursion(): ?excursion
+    public function getReservation(): ?Reservation
     {
-        return $this->detailExcursion;
+        return $this->reservation;
     }
 
-    public function setDetailExcursion(?excursion $detailExcursion): self
+    public function setReservation(?Reservation $reservation): self
     {
-        $this->detailExcursion = $detailExcursion;
+        $this->reservation = $reservation;
+
+        return $this;
+    }
+
+    public function getExcursion(): ?Excursion
+    {
+        return $this->excursion;
+    }
+
+    public function setExcursion(?Excursion $excursion): self
+    {
+        $this->excursion = $excursion;
 
         return $this;
     }

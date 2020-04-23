@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Visite;
+use App\Form\UserType;
 use App\Form\VisiteType;
 use App\Entity\Excursion;
+use App\Entity\Reservation;
 use App\Form\ExcursionType;
 use App\Repository\VisiteRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -179,6 +181,45 @@ class AdminController extends AbstractController
         $user = $userRepo->findAll();
         $vars = ['user' => $user];
         return $this->render('admin/list_user.html.twig', $vars);
+    }
+    // /**
+    //  * @Route("/modifier/user/{id}", name="modifier_user")
+    //  */
+    // public function modifierUser(Request $request, User $user)
+    // {
+    //     $formulaireUser = $this->createForm(UserType::class, $user);
+    //     dd($user);
+    //     $formulaireUser->handleRequest($request);
+    //     if ($formulaireUser->isSubmitted() && $formulaireUser->isValid()) {
+    //         // $fichier = $excursion->getPhoto();
+    //         // $nomFichierServeur = md5(uniqid()) . "." . $fichier->guessExtension();
+    //         // $fichier->move("dossierFichiers", $nomFichierServeur);
+    //         // $excursion->setPhoto($nomFichierServeur);
+    //         $em = $this->getDoctrine()->getManager();
+    //         $em->flush();
+
+    //         return $this->redirectToRoute('afficher_user');
+    //     } else {
+    //         // dd($request->get('id'));
+    //         $vars = [
+    //             'formulaireUser' => $formulaireUser->createView(),
+    //             'id' => $request->get('id')
+    //         ];
+    //         return $this->render('admin/modif_user.html.twig', $vars);
+    //     }
+    // }
+     /**
+     * @Route("/supprimer/excursion/{id}", name="supprimer_excursion")
+     */
+    public function supprimerUser($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $rep = $em->getRepository(User::class);
+        $userASupprime=$rep->find($id);
+        $em->remove($userASupprime);
+        $em->flush();
+
+        return $this->redirectToRoute('afficher_user');
     }
     //------Fin Action User-------//
 }

@@ -39,7 +39,7 @@ class Visite
     private $dureeRecommandee;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\DetailVisite", mappedBy="detailVisite")
+     * @ORM\OneToMany(targetEntity="App\Entity\DetailVisite", mappedBy="visite")
      */
     private $detailVisites;
 
@@ -47,6 +47,16 @@ class Visite
     {
         $this->detailVisites = new ArrayCollection();
     }
+
+    // /**
+    //  * @ORM\OneToMany(targetEntity="App\Entity\DetailVisite", mappedBy="detailVisite")
+    //  */
+    // private $detailVisites;
+
+    // public function __construct()
+    // {
+    //     $this->detailVisites = new ArrayCollection();
+    // }
 
     public function getId(): ?int
     {
@@ -113,7 +123,7 @@ class Visite
     {
         if (!$this->detailVisites->contains($detailVisite)) {
             $this->detailVisites[] = $detailVisite;
-            $detailVisite->setDetailVisite($this);
+            $detailVisite->setVisite($this);
         }
 
         return $this;
@@ -124,11 +134,12 @@ class Visite
         if ($this->detailVisites->contains($detailVisite)) {
             $this->detailVisites->removeElement($detailVisite);
             // set the owning side to null (unless already changed)
-            if ($detailVisite->getDetailVisite() === $this) {
-                $detailVisite->setDetailVisite(null);
+            if ($detailVisite->getVisite() === $this) {
+                $detailVisite->setVisite(null);
             }
         }
 
         return $this;
     }
+    
 }

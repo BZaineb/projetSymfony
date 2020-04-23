@@ -1,12 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Area{% endblock %}
+{% block title %}AreaMembre{% endblock %}
 
 {% block content %}
-<div>
+<div class="container">
 {# {{ dump (app.user) }}  #}
 <h2>Bienvenue {{app.user.nom}}</h2>
-<h6>TODO formulaire devis et réservation plus edit données</h6>
+<h6>TODO formulaire devis et réservation plus edit données</h6>  
+    
+<div>
 </div>
 <a href="{{ logout_path('main')}}"><input type="submit" value="LogOut"></input><a>
 {% endblock %}

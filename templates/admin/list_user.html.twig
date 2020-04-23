@@ -15,27 +15,32 @@ a.btn {
 }
 </style>
 <div class="container">
-<h3>Liste user</h3>
-<table>
-        <tr>
-            <th>Num</th>
-            <th>Nom</th>
-            <th>Prenom</th>
-            <th>Email</th>
-            <th>Localite</th>
-        </tr>
-   >    {% for valeur in user %}
-        <tr>
-            <td>1<td>
-            <td>{{ valeur.nom }}</td>
-            <td>{{ valeur.prenom }}</td>
-            <td>{{ valeur.pseudo }}</td>
-            <td>{{ valeur.email }}</td>
-            <td>{{ valeur.pays }}</td>
-            <td><input type="submit"  value="modifier"></td>
-        </tr> 
-
-{% endfor %}
-</table>
+    <div class="contacts-area mg-b-15">
+        <div class="container-fluid">
+            <div class="row">
+                {% for valeur in user %}
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+                    <div class="hpanel hblue contact-panel contact-panel-cs responsive-mg-b-30">
+                        <div class="panel-body custom-panel-jw">
+                            <img alt="logo" class="img-circle m-b" src="{{ asset('dossierFichiers/1.png')}}"style="width:50px; hight:50px;">
+                            <h3><a href="">{{ valeur.pseudo }}</a></h3>
+                            <p class="card-text">{{ valeur.nom }}, {{ valeur.prenom }}</p>
+                            <p class="card-text">{{ valeur.email }}</p>
+                            <p class="card-text">{{ valeur.pays }}</p>
+                        </div>
+                        <div class="panel-footer contact-footer">
+                            <div class="card-flap flap2">            
+                                <div class="card-actions">
+                                    {# <a href="{{ path ('modifier_excursion' , {'id':valeur.id}) }}" id="btn-edit" class="btn">Modifier</a>  #}
+                                    <a href="{{ path ('supprimer_excursion' , {'id':valeur.id}) }}" class="btn" >Delete</a>
+                                </div>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

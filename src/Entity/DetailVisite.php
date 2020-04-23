@@ -27,14 +27,14 @@ class DetailVisite
     private $dateFin;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\visite", inversedBy="detailVisites")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="detailVisites")
      */
-    private $detailVisite;
+    private $reservation;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Visite", inversedBy="detailVisites")
+     */
+    private $visite;
 
     public function getDateDebut(): ?\DateTimeInterface
     {
@@ -60,15 +60,29 @@ class DetailVisite
         return $this;
     }
 
-    public function getDetailVisite(): ?visite
+    public function getReservation(): ?Reservation
     {
-        return $this->detailVisite;
+        return $this->reservation;
     }
 
-    public function setDetailVisite(?visite $detailVisite): self
+    public function setReservation(?Reservation $reservation): self
     {
-        $this->detailVisite = $detailVisite;
+        $this->reservation = $reservation;
 
         return $this;
     }
+
+    public function getVisite(): ?Visite
+    {
+        return $this->visite;
+    }
+
+    public function setVisite(?Visite $visite): self
+    {
+        $this->visite = $visite;
+
+        return $this;
+    }
+
 }
+

@@ -1,0 +1,17 @@
+{% extends 'adminBase.html.twig' %}
+
+{# {% block title %}Formulaire Visite{% endblock %} #}
+
+
+{% block content %}
+<div class="container mt-4">
+<h1>Modidier User</h1>
+{{ form_start (formulaireUser, {'action': path('modifier_user', {'id':id}), 'method': 'POST'}) }}
+    <div class="row">
+    {{ form_widget (formulaireUser) }}      
+    </div>
+    <button class="btn btn-primary">Modifiez</button>
+    {# <input type="submit" class="btn" value="Ajouter"/> #}
+{{ form_end (formulaireUser) }}
+</div>
+{% endblock %}
