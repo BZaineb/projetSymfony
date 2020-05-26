@@ -22,6 +22,11 @@ class Reservation
      * @ORM\Column(type="string", length=50)
      */
     private $type;
+    
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $nom;
 
     /**
      * @ORM\Column(type="integer")
@@ -40,6 +45,7 @@ class Reservation
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -72,6 +78,18 @@ class Reservation
     public function setType(string $type): self
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): self
+    {
+        $this->nom = $nom;
 
         return $this;
     }
