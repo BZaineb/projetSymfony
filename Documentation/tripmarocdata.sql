@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 23 avr. 2020 à 15:34
+-- Généré le : mer. 27 mai 2020 à 08:33
 -- Version du serveur :  10.4.11-MariaDB
 -- Version de PHP : 7.4.3
 
@@ -118,10 +118,11 @@ INSERT INTO `migration_versions` (`version`, `executed_at`) VALUES
 CREATE TABLE `reservation` (
   `id` int(11) NOT NULL,
   `type` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nom` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nb_personne` int(11) NOT NULL,
   `categorie_hebergement` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `prix` decimal(5,2) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -152,7 +153,11 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `nom`, `prenom`, `pseudo
 (8, 'kawthar@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$Q2I5M205NVEvdk9FOXkxZg$1K6kT9728AB955QpVnYdtsMY2gs0E/UabKDLEI2IOtk', 'kawthar', 'kawthar', 'kawthar', 'Maroc'),
 (9, 'khalid@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$ZmFVa3FhMUUydHNTb2Mwdg$81jikkY9hO0OGE9ITGgPPjR270r48UMhLwkyBShFay4', 'khalid', 'khalid', 'khalid', 'Maroc'),
 (10, 'nom6@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$OEhGajNhVnN3WXZnTzNOWA$oGyWttdtMav5MhTbluTRQAJl28JprosT0t12Uq1ZxQc', 'nom6', 'nom6', 'nom6', 'Belgique'),
-(11, 'nom7@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$cHZlSGVQVG5PVklXWUZjOA$3Oqji6TwNUF/grFqwgPK1zvbOxQnKyghVnuhGzeZa18', 'nom7', 'nom7', 'nom7', 'Belgique');
+(11, 'nom7@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$cHZlSGVQVG5PVklXWUZjOA$3Oqji6TwNUF/grFqwgPK1zvbOxQnKyghVnuhGzeZa18', 'nom7', 'nom7', 'nom7', 'Belgique'),
+(12, 'zaineb@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$OEdOMjg1OEpOUkxWSVhkWA$WRp27y67uXI/4BPpl4k1/j6fk6esBL5vkdCXZbBQXiM', 'zaineb', 'zaineb', 'zaineb', 'Maroc'),
+(13, 'mouna@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$eVZ0ejBPaE5YYnhkOUZjVw$kdt/U8MNjkYLlmdeOuhMKkdv8PVZA2w22u6a9ucwSIc', 'Mouna', 'Mouna', 'Mouna', 'Espagne'),
+(14, 'admin@gmail.com', '[\"ROLE_ADMIN\"]', '$argon2id$v=19$m=65536,t=4,p=1$ZGFIZmlqbnVjMTZrY3dRWg$gkv1YhiH6d49USfUR7BcRHi2EAdSQHtk+C4cMKQ87t0', 'admin', 'admin', 'admin', 'Maroc'),
+(15, 'khalid1@gmail.com', '[]', '$argon2id$v=19$m=65536,t=4,p=1$Ni5rUDlyMjl0Ri9NL1VZbA$a917rdGVnqy6g2FEM3f9hrNG1hmml8KB3SDPdiFk7Bw', 'khalid', 'khalid', 'khalid', 'Belgique');
 
 -- --------------------------------------------------------
 
@@ -275,7 +280,7 @@ ALTER TABLE `reservation`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `visite`
