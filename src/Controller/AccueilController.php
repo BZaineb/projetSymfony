@@ -25,10 +25,33 @@ class AccueilController extends AbstractController
         $userConnecte = $this->getUser();
         $profil = $rep->find($userConnecte->getId());
         $vars = ['profil' => $profil];
-        return $this->render('accueil/profil.html.twig', $vars);
+        return $this->render('accueil/edit_profil.html.twig', $vars);
     }
     /**
-     * @Route("/", name="meteo")
+     * @Route("/modifier/profil/{id}", name="modifier_profil")
+     */
+    public function clientEdit(Request $request, User $user){
+    
+        $userId= $this->getUser()->getId();
+        // dd($user->getId());
+        // =$request->request->get('id');
+        $em = $this->getDoctrine()->getManager();
+        $profil = $em->getRepository(User::class)->find($userId);
+        // dd($profil);
+        $profil->setNom($request->request->get('nom'));
+        $profil->setPrenom($request->request->get('prenom'));
+        $profil->setPseudo($request->request->get('pseudo'));
+        $profil->setEmail($request->request->get('email'));
+        $profil->setPays($request->request->get('pays'));
+        
+        $em->flush();
+        $vars = ['profil' => $profil];
+        return $this->render('accueil/profil.html.twig',$vars);
+        // return $this->redirectToRoute("accueil");
+
+    }
+    /**
+     * @Route("/meteo", name="meteo")
      */
     public function meteo()
     {
@@ -54,54 +77,29 @@ class AccueilController extends AbstractController
      */
     public function demandeDevis (Request $request){
         $unDevis = new Reservation();
-        $unDevis->setUser($this->getUser());
-        // ici je récupère les données excursions
-        // $em = $this->getDoctrine()->getManager();
-        // $excursionRepo = $em->getRepository(Excursion::class);
-        //je récupère l'excursion choisi
-        // $excursion = $excursionRepo->findAll();
-        // $vars = ['excursion' => $excursion];
-        // dd($vars);
         // on crée le formulaire du type souhaité
         $formulaireDevis = $this->createForm (ReservationType::class,$unDevis, array('action' => $this->generateUrl("demande_devis"), 'method' => 'POST'));
         $formulaireDevis->handleRequest($request);
         $detailExcursion = new DetailExcursion();
-        $detailExcursion->setReservation($unDevis);
+        
         // je dois envoyer l'id d'excursion a l'entité detailExcursion
-        // $detailExcursion->setExcursion($excursion);
-
-        // dd($detailExcursion);
-        // $detailExcursion->setExcursion($excursion);
+        
         $formDetailExcursion = $this->createForm(DetailExcursionType::class,$detailExcursion);
-        $formDetailExcursion->handleRequest($request);
-        
-        
-        if ($formulaireDevis->isSubmitted() && $formulaireDevis->isValid()) 
+        $formDetailExcursion->handleRequest($request);      
+        if ($formulaireDevis->isSubmitted()) 
+        // && $formulaireDevis->isValid()) 
         {
+            $unDevis->setUser($this->getUser());
+            $detailExcursion->setReservation($unDevis);
             $em = $this->getDoctrine()->getManager();
-            $em->persist($unDevis);
-            // $em->persist($excursion);
-            
+            $em->persist($unDevis);        
             $em->persist($detailExcursion);
             $em->flush();
-            //return new Response('votre devis a été envoyé');
         }
-            // on envoie un objet FormView à la vue pour qu'elle puisse 
-            // faire le rendu, pas le formulaire en soi
-            // $devis = ['devis'=>$formulaireDevis->createView()];
-            // $detailExcursion1=['formDetail'=>$formDetailExcursion->createView()];
-            
-            
             return $this->render ('/accueil/devis.html.twig',
             [
-                'devis'=>$formulaireDevis->createView(),
-                // 'excursion' => $excursion,            
+                'devis'=>$formulaireDevis->createView(),           
                 'formDetail'=>$formDetailExcursion->createView(),
-                'userConnecte'=>$this->getUser()]);
-            // ['devis'=>$devis,'excursion'=>$vars,'detail'=>$formDetailExcursion,'userActif'=>$this->getUser()]);
-            // $vars = ['devis' => $formulaireDevis->createView()];
-            
-            // return $this->render ('/accueil/index.html.twig', $vars);     
-        }  
-      
+                'userConnecte'=>$this->getUser()]);    
+    }  
 }

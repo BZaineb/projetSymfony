@@ -1,0 +1,26 @@
+{% extends 'zoneMembre.html.twig' %}
+
+{% block title %}zoneMembre{% endblock %}
+
+{% block body %}
+<div class="main">
+
+<div class="header"><h2>Modifier Profil</h2></div>
+{% if profil %}
+
+<form action="{{ path ('modifier_profil',{'id': profil.id}) }}" method="POST">
+
+        <label>Nom </label><input required type="text" name="nom"  value="{{ profil.nom }}"></input></br>
+        <label>Prenom</label><input required type="text" name="prenom" value ="{{ profil.prenom}}"></input></br>
+        <label>Adresse</label><input required type="text" name="pseudo" value ="{{ profil.pseudo}}"></input></br>
+        <label>Email</label><input required type="email" name="email" value ="{{ profil.email}}"></input></br>
+        <label>Pays</label><input required type="text" name="pays" value="{{ profil.pays}}"></input></br>
+        {# <input type="hidden" name="id" value= "{{ profil.id }}"></input></br> #}
+        <input type="submit">Modification</input>
+
+</form>
+{% endif %}
+</div>
+
+{% endblock %}
+

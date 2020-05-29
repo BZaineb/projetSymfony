@@ -7,6 +7,12 @@
     <p><span>Nom {{profil.nom}}</span></p>
     <p><span>Prenom {{profil.prenom}}</span></p> 
     <p><span>Pseudo {{profil.pseudo}}</span></p>
+    <p><span>Pays {{profil.pays}}</span></p>
+    <div class="card-actions">
+          <a href="{{ path ('accueil' , {'id':profil.id}) }}" id="btn-edit" class="btn">Modifier</a> 
+          {# <a href="{{ path ('modifier_profil' , {'id':profil.id}) }}" id="btn-edit" class="btn">Modifier</a> #}
+          {# <a href="{{ path ('supprimer_excursion' , {'id':valeur.id}) }}" class="btn" >Delete</a> #}
+        </div>
 </div> 
 
 {% endblock %}
